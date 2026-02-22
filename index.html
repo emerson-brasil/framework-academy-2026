@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Framework Estratégico Academy 2026 - Final</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 40px 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            padding: 40px;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 20px;
+        }
+        
+        .header h1 {
+            color: #2c3e50;
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            color: #7f8c8d;
+            font-size: 16px;
+        }
+        
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+        
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin: 0 5px;
+        }
+        
+        .btn-primary {
+            background: #667eea;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+        
+        .btn-success {
+            background: #43e97b;
+            color: white;
+        }
+        
+        .btn-success:hover {
+            background: #38d66c;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(67, 233, 123, 0.4);
+        }
+        
+        .framework {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        
+        .strategy-column {
+            background: #f8f9fa;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .strategy-header {
+            padding: 20px;
+            color: white;
+            font-weight: bold;
+            font-size: 16px;
+            text-align: center;
+            min-height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1.4;
+        }
+        
+        .strategy-1 { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        .strategy-2 { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
+        .strategy-3 { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); }
+        .strategy-4 { background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); }
+        .strategy-5 { background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); }
+        
+        .business-units {
+            padding: 0;
+        }
+        
+        .business-unit {
+            padding: 15px;
+            border-bottom: 1px solid #e0e0e0;
+            border-left: 4px solid;
+            min-height: 120px;
+        }
+        
+        .business-unit:last-child {
+            border-bottom: none;
+        }
+        
+        .unit-header {
+            font-weight: bold;
+            font-size: 14px;
+            margin-bottom: 10px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .add-activity-btn {
+            padding: 4px 8px;
+            font-size: 11px;
+            background: white;
+            border: 1px solid;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .add-activity-btn:hover {
+            transform: scale(1.05);
+        }
+        
+        .unit-activities {
+            font-size: 12px;
+            line-height: 1.6;
+            color: #2c3e50;
+        }
+        
+        .activity-item {
+            margin: 6px 0;
+            padding: 6px;
+            background: white;
+            border-radius: 4px;
+            border-left: 3px solid;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .activity-input {
+            flex: 1;
+            border: 1px solid #e0e0e0;
+            padding: 6px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-family: inherit;
+        }
+        
+        .activity-input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.1);
+        }
+        
+        .delete-btn {
+            padding: 4px 8px;
+            background: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 11px;
+            transition: all 0.2s;
+        }
+        
+        .delete-btn:hover {
+            background: #c0392b;
+        }
+        
+        .empty-state {
+            color: #95a5a6;
+            font-style: italic;
+            font-size: 11px;
+            padding: 10px;
+            text-align: center;
+        }
+        
+        /* Estilo especial para coluna consolidada */
+        .consolidated-column {
+            padding: 20px;
+            border-left: 4px solid #fa709a;
+        }
+        
+        .consolidated-header {
+            font-weight: bold;
+            font-size: 14px;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #fa709a;
+            color: #c0392b;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .consolidated-column .add-activity-btn {
+            border-color: #fa709a;
+            color: #c0392b;
+        }
+        
+        .consolidated-column .activity-item {
+            border-left-color: #fa709a;
+        }
+        
+        /* Cores para cada unidade de negócio */
+        .neo {
+            border-left-color: #3498db;
+        }
+        
+        .neo .unit-header {
+            color: #2980b9;
+            border-bottom-color: #3498db;
+        }
+        
+        .neo .add-activity-btn {
+            border-color: #3498db;
+            color: #2980b9;
+        }
+        
+        .neo .activity-item {
+            border-left-color: #3498db;
+        }
+        
+        .pll {
+            border-left-color: #e74c3c;
+        }
+        
+        .pll .unit-header {
+            color: #c0392b;
+            border-bottom-color: #e74c3c;
+        }
+        
+        .pll .add-activity-btn {
+            border-color: #e74c3c;
+            color: #c0392b;
+        }
+        
+        .pll .activity-item {
+            border-left-color: #e74c3c;
+        }
+        
+        .pul {
+            border-left-color: #9b59b6;
+        }
+        
+        .pul .unit-header {
+            color: #8e44ad;
+            border-bottom-color: #9b59b6;
+        }
+        
+        .pul .add-activity-btn {
+            border-color: #9b59b6;
+            color: #8e44ad;
+        }
+        
+        .pul .activity-item {
+            border-left-color: #9b59b6;
+        }
+        
+        .dig {
+            border-left-color: #f39c12;
+        }
+        
+        .dig .unit-header {
+            color: #d68910;
+            border-bottom-color: #f39c12;
+        }
+        
+        .dig .add-activity-btn {
+            border-color: #f39c12;
+            color: #d68910;
+        }
+        
+        .dig .activity-item {
+            border-left-color: #f39c12;
+        }
+        
+        .led {
+            border-left-color: #16a085;
+        }
+        
+        .led .unit-header {
+            color: #117a65;
+            border-bottom-color: #16a085;
+        }
+        
+        .led .add-activity-btn {
+            border-color: #16a085;
+            color: #117a65;
+        }
+        
+        .led .activity-item {
+            border-left-color: #16a085;
+        }
+        
+        .legend {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 30px;
+        }
+        
+        .legend h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+        
+        .legend-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+            border: 2px solid #ddd;
+        }
+        
+        .legend-item span {
+            font-size: 14px;
+            color: #2c3e50;
+            font-weight: 500;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #e0e0e0;
+            color: #7f8c8d;
+            font-size: 12px;
+        }
+        
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            
+            .controls {
+                display: none;
+            }
+            
+            .add-activity-btn, .delete-btn {
+                display: none;
+            }
+        }
+        
+        @media (max-width: 1400px) {
+            .framework {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        
+        @media (max-width: 1000px) {
+            .framework {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .framework {
+                grid-template-columns: 1fr;
+            }
+            
+            .container {
+                padding: 20px;
+            }
+            
+            .header h1 {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎯 Framework Estratégico Academy 2026</h1>
+            <p>Alinhamento de Estratégias Prioritárias com Unidades de Negócio e Atividades (Versão Final)</p>
+        </div>
+        
+        <div class="controls">
+            <div>
+                <button class="btn btn-primary" onclick="window.print()">🖨️ Imprimir Framework</button>
+            </div>
+            <div>
+                <button class="btn btn-success" onclick="saveData()">💾 Salvar Dados</button>
+                <button class="btn btn-primary" onclick="loadData()">📂 Carregar Dados</button>
+            </div>
+        </div>
+        
+        <div class="framework" id="framework">
+            <!-- As colunas serão geradas dinamicamente pelo JavaScript -->
+        </div>
+        
+        <!-- Legenda -->
+        <div class="legend">
+            <h3>📋 Legenda - Unidades de Negócio da Academy</h3>
+            <div class="legend-items">
+                <div class="legend-item">
+                    <div class="legend-color" style="border-left: 4px solid #3498db;"></div>
+                    <span><strong>NEO</strong> - Neuromobility</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="border-left: 4px solid #e74c3c;"></div>
+                    <span><strong>PLL</strong> - Próteses Membro Inferior</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="border-left: 4px solid #9b59b6;"></div>
+                    <span><strong>PUL</strong> - Próteses Membro Superior</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="border-left: 4px solid #f39c12;"></div>
+                    <span><strong>DIG</strong> - Soluções Digitais</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="border-left: 4px solid #16a085;"></div>
+                    <span><strong>LED</strong> - Learning & Development</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>Framework Estratégico Academy 2026 | Ottobock Brasil | Alinhamento de Estratégias, Unidades de Negócio e Atividades</p>
+        </div>
+    </div>
+    
+    <script>
+        const strategies = [
+            { id: 1, name: '1. Alavancar Valor da Marca Ottobock', class: 'strategy-1' },
+            { id: 2, name: '2. Parceiro Clínico de Referência dos Médicos', class: 'strategy-2' },
+            { id: 3, name: '3. Crescimento Sustentável em Membro Inferior', class: 'strategy-3' },
+            { id: 4, name: '4. Integração das Clínicas Ottobock.care', class: 'strategy-4' },
+            { id: 5, name: '5. Engajamento e Desenvolvimento de Pessoas', class: 'strategy-5' }
+        ];
+        
+        const businessUnits = [
+            { id: 'neo', name: '🧠 NEO (Neuromobility)', class: 'neo' },
+            { id: 'pll', name: '🦵 PLL (Próteses Membro Inferior)', class: 'pll' },
+            { id: 'pul', name: '✋ PUL (Próteses Membro Superior)', class: 'pul' },
+            { id: 'dig', name: '💻 DIG (Soluções Digitais)', class: 'dig' },
+            { id: 'led', name: '📚 LED (Learning & Development)', class: 'led' }
+        ];
+        
+        // Dados reais da equipe Academy
+        const initialData = {
+            '1-neo': [
+                'Não falhar na produção do iFab',
+                'Prazo de entrega do iFab',
+                'Levar os componentes p/ B2B gerando experiencia e valorizando o produto',
+                'Projeto LEM (Epidural e Lesao Medular)',
+                'Projeto cientifico ABOTEC (NEO, PUL, PLL)',
+                'Coquetel lançamento (NEO, PUL, PLL)',
+                'INSS, AACD',
+                'Jantar com médicos, demo produtos com paciente',
+                'Eventos cientificos',
+                'Disponibilidade saldo estoque (demo/test drive) - NEO, PLL, PUL',
+                'Test Drives (Tango, C-Brace)',
+                'Digitalização'
+            ],
+            '1-pll': [
+                'Tour digital',
+                'Certificações locais',
+                'Tour componentes B2B (Joelhos e Pés)',
+                'Test Drives e Demo',
+                'B2C (Reforço digital nas clinicas)',
+                'Ottobock Experience Regionalizado',
+                'INSS, AACD e Hospital do Amor',
+                'Projeto cientifico ABOTEC',
+                'Digitalização de MI'
+            ],
+            '1-pul': [
+                'Tour Sérgio: Clareza na explicação e aproximação com os clientes',
+                'Videos Redes Sociais',
+                'Digitalização de MS',
+                'Workshop com medicos regionalmente ou internamente',
+                'Jantar com médicos e demonstração de produtos com o Sérgio'
+            ],
+            '1-dig': [
+                'Digitalização'
+            ],
+            '1-led': [
+                'Eventos cientificos',
+                'Projetos cientificos ABOTEC'
+            ],
+            '2-neo': [
+                'Demonstração de produtos com pacientes'
+            ],
+            '2-pll': [
+                'Demonstração de produtos com pacientes'
+            ],
+            '2-pul': [
+                'Workshop com medicos regionalmente ou internamente',
+                'Jantar com médicos e demonstração de produtos com o Sérgio',
+                'Tour com Sérgio',
+                'Demonstração de produtos com pacientes'
+            ],
+            '2-dig': [],
+            '2-led': [],
+            // Estratégia 3 consolidada - todas as atividades em uma lista única
+            '3-consolidated': [
+                'Tour componentes B2B (joelhos e pés)',
+                'Tour digital (NEO, PUL, PLL)',
+                'B2C - Reforço do digital nas clinicas (NEO, PUL, PLL)',
+                'Treinamentos locais (NEO)',
+                'Ottobock Experience (Regionalizado)'
+            ],
+            '4-neo': [
+                'FitKit Tango em todas as clinicas'
+            ],
+            '4-pll': [],
+            '4-pul': [],
+            '4-dig': [
+                'Ficha componentes avaliação/ orçamento'
+            ],
+            '4-led': [
+                'Suporte Academy Especializado',
+                'Tornar equipe clinica independente',
+                'Dividir informações tecnicas com as clinicas primeiramente',
+                'Encontro periodicos entre clinica e Equipe Academy'
+            ],
+            // Estratégia 5 consolidada - todas as atividades em uma lista única
+            '5-consolidated': [
+                'Reuniões periodicas - Academy (~30min)',
+                'Evitar sobrecarga de trabalho',
+                'Compensação imediata dos colaboradores',
+                'Melhorar comunicação interdepartamental',
+                'Reuniões individuais PDI'
+            ]
+        };
+        
+        // Inicializar framework
+        function initFramework() {
+            const frameworkDiv = document.getElementById('framework');
+            frameworkDiv.innerHTML = '';
+            
+            strategies.forEach(strategy => {
+                const column = document.createElement('div');
+                column.className = 'strategy-column';
+                
+                // Estratégias 3 e 5 têm tratamento especial (consolidadas)
+                if (strategy.id === 3 || strategy.id === 5) {
+                    column.innerHTML = `
+                        <div class="strategy-header ${strategy.class}">
+                            ${strategy.name}
+                        </div>
+                        <div class="consolidated-column">
+                            <div class="consolidated-header">
+                                <span>📋 Ações Consolidadas</span>
+                                <button class="add-activity-btn" onclick="addConsolidatedActivity(${strategy.id})">+ Adicionar</button>
+                            </div>
+                            <div class="unit-activities" id="activities-${strategy.id}-consolidated">
+                                <!-- Atividades consolidadas serão adicionadas aqui -->
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    // Estratégias 1, 2 e 4 mantêm estrutura por unidade de negócio
+                    column.innerHTML = `
+                        <div class="strategy-header ${strategy.class}">
+                            ${strategy.name}
+                        </div>
+                        <div class="business-units">
+                            ${businessUnits.map(unit => `
+                                <div class="business-unit ${unit.class}" data-strategy="${strategy.id}" data-unit="${unit.id}">
+                                    <div class="unit-header">
+                                        <span>${unit.name}</span>
+                                        <button class="add-activity-btn" onclick="addActivity(${strategy.id}, '${unit.id}')">+ Adicionar</button>
+                                    </div>
+                                    <div class="unit-activities" id="activities-${strategy.id}-${unit.id}">
+                                        <!-- Atividades serão adicionadas aqui -->
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    `;
+                }
+                
+                frameworkDiv.appendChild(column);
+            });
+            
+            // Carregar dados iniciais
+            loadInitialData();
+        }
+        
+        // Carregar dados iniciais
+        function loadInitialData() {
+            strategies.forEach(strategy => {
+                if (strategy.id === 3 || strategy.id === 5) {
+                    // Carregar atividades consolidadas das estratégias 3 e 5
+                    const container = document.getElementById(`activities-${strategy.id}-consolidated`);
+                    const activities = initialData[`${strategy.id}-consolidated`] || [];
+                    
+                    if (activities.length > 0) {
+                        activities.forEach(activity => {
+                            const activityDiv = document.createElement('div');
+                            activityDiv.className = 'activity-item';
+                            activityDiv.innerHTML = `
+                                <input type="text" class="activity-input" value="${activity.replace(/"/g, '&quot;')}">
+                                <button class="delete-btn" onclick="deleteConsolidatedActivity(this)">✕</button>
+                            `;
+                            container.appendChild(activityDiv);
+                        });
+                    } else {
+                        const emptyDiv = document.createElement('div');
+                        emptyDiv.className = 'empty-state';
+                        emptyDiv.textContent = 'Clique em "+ Adicionar" para incluir atividades';
+                        container.appendChild(emptyDiv);
+                    }
+                } else {
+                    // Carregar atividades por unidade de negócio para estratégias 1, 2 e 4
+                    businessUnits.forEach(unit => {
+                        const key = `${strategy.id}-${unit.id}`;
+                        const container = document.getElementById(`activities-${strategy.id}-${unit.id}`);
+                        
+                        if (initialData[key] && initialData[key].length > 0) {
+                            initialData[key].forEach(activity => {
+                                const activityDiv = document.createElement('div');
+                                activityDiv.className = 'activity-item';
+                                activityDiv.innerHTML = `
+                                    <input type="text" class="activity-input" value="${activity.replace(/"/g, '&quot;')}">
+                                    <button class="delete-btn" onclick="deleteActivity(this)">✕</button>
+                                `;
+                                container.appendChild(activityDiv);
+                            });
+                        } else {
+                            const emptyDiv = document.createElement('div');
+                            emptyDiv.className = 'empty-state';
+                            emptyDiv.textContent = 'Clique em "+ Adicionar" para incluir atividades';
+                            container.appendChild(emptyDiv);
+                        }
+                    });
+                }
+            });
+        }
+        
+        // Adicionar atividade (estratégias 1-4)
+        function addActivity(strategyId, unitId) {
+            const container = document.getElementById(`activities-${strategyId}-${unitId}`);
+            
+            const emptyState = container.querySelector('.empty-state');
+            if (emptyState) {
+                emptyState.remove();
+            }
+            
+            const activityId = Date.now();
+            
+            const activityDiv = document.createElement('div');
+            activityDiv.className = 'activity-item';
+            activityDiv.innerHTML = `
+                <input type="text" class="activity-input" placeholder="Digite a atividade..." data-activity-id="${activityId}">
+                <button class="delete-btn" onclick="deleteActivity(this)">✕</button>
+            `;
+            
+            container.appendChild(activityDiv);
+            activityDiv.querySelector('.activity-input').focus();
+        }
+        
+        // Adicionar atividade consolidada (estratégias 3 e 5)
+        function addConsolidatedActivity(strategyId) {
+            const container = document.getElementById(`activities-${strategyId}-consolidated`);
+            
+            const emptyState = container.querySelector('.empty-state');
+            if (emptyState) {
+                emptyState.remove();
+            }
+            
+            const activityId = Date.now();
+            
+            const activityDiv = document.createElement('div');
+            activityDiv.className = 'activity-item';
+            activityDiv.innerHTML = `
+                <input type="text" class="activity-input" placeholder="Digite a atividade..." data-activity-id="${activityId}">
+                <button class="delete-btn" onclick="deleteConsolidatedActivity(this)">✕</button>
+            `;
+            
+            container.appendChild(activityDiv);
+            activityDiv.querySelector('.activity-input').focus();
+        }
+        
+        // Deletar atividade (estratégias 1-4)
+        function deleteActivity(button) {
+            if (confirm('Deseja realmente excluir esta atividade?')) {
+                const container = button.parentElement.parentElement;
+                button.parentElement.remove();
+                
+                if (container.querySelectorAll('.activity-item').length === 0) {
+                    const emptyDiv = document.createElement('div');
+                    emptyDiv.className = 'empty-state';
+                    emptyDiv.textContent = 'Clique em "+ Adicionar" para incluir atividades';
+                    container.appendChild(emptyDiv);
+                }
+            }
+        }
+        
+        // Deletar atividade consolidada (estratégia 5)
+        function deleteConsolidatedActivity(button) {
+            if (confirm('Deseja realmente excluir esta atividade?')) {
+                const container = button.parentElement.parentElement;
+                button.parentElement.remove();
+                
+                if (container.querySelectorAll('.activity-item').length === 0) {
+                    const emptyDiv = document.createElement('div');
+                    emptyDiv.className = 'empty-state';
+                    emptyDiv.textContent = 'Clique em "+ Adicionar" para incluir atividades';
+                    container.appendChild(emptyDiv);
+                }
+            }
+        }
+        
+        // Salvar dados
+        function saveData() {
+            const data = {};
+            
+            strategies.forEach(strategy => {
+                if (strategy.id === 3 || strategy.id === 5) {
+                    // Salvar atividades consolidadas das estratégias 3 e 5
+                    const container = document.getElementById(`activities-${strategy.id}-consolidated`);
+                    const inputs = container.querySelectorAll('.activity-input');
+                    data[`${strategy.id}-consolidated`] = Array.from(inputs).map(input => input.value).filter(val => val.trim() !== '');
+                } else {
+                    // Salvar atividades por unidade de negócio para estratégias 1, 2 e 4
+                    businessUnits.forEach(unit => {
+                        const key = `${strategy.id}-${unit.id}`;
+                        const container = document.getElementById(`activities-${strategy.id}-${unit.id}`);
+                        const inputs = container.querySelectorAll('.activity-input');
+                        data[key] = Array.from(inputs).map(input => input.value).filter(val => val.trim() !== '');
+                    });
+                }
+            });
+            
+            const dataStr = JSON.stringify(data, null, 2);
+            const dataBlob = new Blob([dataStr], { type: 'application/json' });
+            const url = URL.createObjectURL(dataBlob);
+            
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = `framework_academy_${new Date().toISOString().split('T')[0]}.json`;
+            link.click();
+            
+            URL.revokeObjectURL(url);
+            alert('Dados salvos com sucesso!');
+        }
+        
+        // Carregar dados
+        function loadData() {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = 'application/json';
+            
+            input.onchange = (e) => {
+                const file = e.target.files[0];
+                const reader = new FileReader();
+                
+                reader.onload = (event) => {
+                    try {
+                        const data = JSON.parse(event.target.result);
+                        
+                        strategies.forEach(strategy => {
+                            if (strategy.id === 3 || strategy.id === 5) {
+                                // Carregar atividades consolidadas das estratégias 3 e 5
+                                const container = document.getElementById(`activities-${strategy.id}-consolidated`);
+                                container.innerHTML = '';
+                                
+                                if (data[`${strategy.id}-consolidated`] && data[`${strategy.id}-consolidated`].length > 0) {
+                                    data[`${strategy.id}-consolidated`].forEach(activity => {
+                                        const activityDiv = document.createElement('div');
+                                        activityDiv.className = 'activity-item';
+                                        activityDiv.innerHTML = `
+                                            <input type="text" class="activity-input" value="${activity.replace(/"/g, '&quot;')}">
+                                            <button class="delete-btn" onclick="deleteConsolidatedActivity(this)">✕</button>
+                                        `;
+                                        container.appendChild(activityDiv);
+                                    });
+                                } else {
+                                    const emptyDiv = document.createElement('div');
+                                    emptyDiv.className = 'empty-state';
+                                    emptyDiv.textContent = 'Clique em "+ Adicionar" para incluir atividades';
+                                    container.appendChild(emptyDiv);
+                                }
+                            } else {
+                                // Carregar atividades por unidade de negócio para estratégias 1, 2 e 4
+                                businessUnits.forEach(unit => {
+                                    const key = `${strategy.id}-${unit.id}`;
+                                    const container = document.getElementById(`activities-${strategy.id}-${unit.id}`);
+                                    container.innerHTML = '';
+                                    
+                                    if (data[key] && data[key].length > 0) {
+                                        data[key].forEach(activity => {
+                                            const activityDiv = document.createElement('div');
+                                            activityDiv.className = 'activity-item';
+                                            activityDiv.innerHTML = `
+                                                <input type="text" class="activity-input" value="${activity.replace(/"/g, '&quot;')}">
+                                                <button class="delete-btn" onclick="deleteActivity(this)">✕</button>
+                                            `;
+                                            container.appendChild(activityDiv);
+                                        });
+                                    } else {
+                                        const emptyDiv = document.createElement('div');
+                                        emptyDiv.className = 'empty-state';
+                                        emptyDiv.textContent = 'Clique em "+ Adicionar" para incluir atividades';
+                                        container.appendChild(emptyDiv);
+                                    }
+                                });
+                            }
+                        });
+                        
+                        alert('Dados carregados com sucesso!');
+                    } catch (error) {
+                        alert('Erro ao carregar dados: ' + error.message);
+                    }
+                };
+                
+                reader.readAsText(file);
+            };
+            
+            input.click();
+        }
+        
+        // Inicializar ao carregar a página
+        window.onload = initFramework;
+    </script>
+</body>
+</html>
